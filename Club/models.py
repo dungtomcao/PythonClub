@@ -11,7 +11,7 @@ class clubMeeting(models.Model):
     meetingagenda=models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.meetingTitle
+        return self.meetingtitle
 
     class Meta:
         db_table='clubmeeting'
