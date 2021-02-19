@@ -22,12 +22,10 @@ class meetingMinutestest(TestCase):
     def test_typestring(self):
         self.assertEqual(str(self.type), '30 mins')
 
-#error:meetingMinutes has no meetingid
-#I don't know why this happens and would love some help, thank you
-
     def test_tablename(self):
         self.assertEqual(str(meetingMinutes._meta.db_table), 'meetingminutes')
-
+#update: 'meetingMinutes has no meetingid' error troubleshooted 
+#__str__ in meetingMinutes was changed from self.meetingid to self.meetingminutes
 class resourcetest(TestCase):
     def setUp(self):
         self.type=resource(resourcename='Python Cheat Sheet')
