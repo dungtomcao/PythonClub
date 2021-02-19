@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import resource, clubMeeting
+from .forms import clubMeetingForm, resourceForm
 
 # Create your views here.
 def index(request):
@@ -16,3 +17,29 @@ def meetings(request):
 def meetingdetails(request, id):
     meeting=get_object_or_404(clubMeeting, pk=id)
     return render(request, 'Club/meetingdetail.html', {'meeting' : meeting})
+
+def newMeeting(request):
+    form=clubMeetingForm
+    if request.method=='POST':
+        form=clubMeetingForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=True)
+            post.save()
+            form=clubMeetingForm()
+
+    else:
+        form=clubMeetingForm()
+    return render(request, 'Club/newmeeting.html', {'form': form})
+
+def newResource(request):
+    form=resourceForm
+    if request.method=='POST':
+        form=resourceForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=True)
+            post.save()
+            form=resourceForm()
+
+    else:
+        form=resourceForm()
+    return render(request, 'Club/newresource.html', {'form': form})
